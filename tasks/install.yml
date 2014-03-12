@@ -1,0 +1,13 @@
+---
+- name: update apt cache
+  apt: update_cache=yes
+  sudo: true
+- name: install apt packages
+  apt: pkg={{ item }} state=latest
+  sudo: true
+  with_items:
+    - apache2
+    - php5
+    - mysql-server
+    - php5-mysql
+    - imagemagick

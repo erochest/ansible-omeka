@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+    - include: tasks/install.yml
+    - include: tasks/config.yml
+    - include: tasks/db.yml
+    - include: tasks/apache.yml
+    - include: tasks/omeka.yml
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
+      sudo: true
