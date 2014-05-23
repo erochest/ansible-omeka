@@ -4,7 +4,7 @@
             src=omeka.conf.j2
   sudo: true
 - name: disable default site
-  command: a2dissite default
+  command: a2dissite 000-default
   sudo: true
   notify:
     - restart apache2
