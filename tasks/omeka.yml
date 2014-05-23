@@ -1,42 +1,57 @@
 ---
+- name: git clone omeka
+  git: repo=https://github.com/omeka/Omeka.git
+       dest={{ omekadir }}
+       recursive=yes
+  sudo: true
 - name: db.ini
   template: src=db.ini.j2 dest={{ omekadir }}/db.ini
   sudo: true
 - name: chmod db.ini
   file: path={{ omekadir }}/db.ini mode=0666
+  sudo: true
 - name: cp config.ini
   command: cp {{ omekadir }}/application/config/config.ini.changeme {{ omekadir }}/application/config/config.ini
+  sudo: true
 - name: config.ini debug
   ini_file: dest={{ omekadir }}/application/config/config.ini
             section=site
             option=debug.exceptions
             value={{ debug }}
+  sudo: true
 - name: cp tests/config.ini
   command: cp {{ omekadir }}/application/tests/config.ini.changeme {{ omekadir }}/application/tests/config.ini
+  sudo: true
 - name: tests/config.ini db.username
   ini_file: dest={{ omekadir }}/application/tests/config.ini
             section=testing
             option=db.username
             value=omeka
+  sudo: true
 - name: tests/config.ini db.password
   ini_file: dest={{ omekadir }}/application/tests/config.ini
             section=testing
             option=db.password
             value=omeka
+  sudo: true
 - name: tests/config.ini db.dbname
   ini_file: dest={{ omekadir }}/application/tests/config.ini
             section=testing
             option=db.dbname
             value=omeka
+  sudo: true
 - name: .htaccess
   command: cp {{ omekadir }}/.htaccess.changeme {{ omekadir }}/.htaccess
+  sudo: true
 - name: APPLICATION_ENV
   lineinfile: dest={{ omekadir }}/.htaccess
               backrefs=yes
               regexp='# (SetEnv APPLICATION_ENV .*)'
               line='\1'
+  sudo: true
 - name: files
   file: path={{ omekadir }}/files recurse=yes mode=0777
+  sudo: true
 - name: hostname
   lineinfile: line='127.0.0.1        {{ hostname }}' state=present insertafter=EOF dest=/etc/hosts
   sudo: true
