@@ -11,3 +11,5 @@
     - mysql-server
     - php5-mysql
     - imagemagick
+    - git
+    - git-core
