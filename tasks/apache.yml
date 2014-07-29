@@ -14,8 +14,6 @@
   notify:
     - restart apache2
 - name: a2enmod rewrite
-  command: a2enmod rewrite
+  apache2_module: name=rewrite state=present
   sudo: true
-  notify:
-    - restart apache2
 - service: name=apache2 state=started
