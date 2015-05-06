@@ -3,6 +3,8 @@
   git: repo=https://github.com/omeka/Omeka.git
        dest={{ omekadir }}
        recursive=yes
+       accept_hostkey=yes
+       force=yes
   sudo: true
 - name: db.ini
   template: src=db.ini.j2 dest={{ omekadir }}/db.ini
