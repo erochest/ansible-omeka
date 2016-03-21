@@ -1,10 +1,10 @@
 ---
 - name: update apt cache
   apt: update_cache=yes
-  sudo: true
+  become: true
 - name: install apt packages
   apt: pkg={{ item }} state=latest
-  sudo: true
+  become: true
   with_items:
     - apache2
     - php5

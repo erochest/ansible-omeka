@@ -1,6 +1,6 @@
 ---
 - name: apt-get python-mysqldb
-  sudo: true
+  become: true
   apt: pkg=python-mysqldb state=latest
 - name: clear omeka user
   mysql_user: name=omeka state=absent
