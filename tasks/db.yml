@@ -3,8 +3,13 @@
   become: true
   apt: pkg=python-mysqldb state=latest
 - name: clear omeka user
-  mysql_user: name=omeka state=absent
+  mysql_user: name=omeka state=absent login_user=root
 - name: create omeka user
-  mysql_user: name=omeka password=omeka state=present priv=*.*:ALL
+  mysql_user: >
+    name=omeka
+    password=omeka
+    state=present
+    priv=*.*:ALL
+    login_user=root
 - name: create omeka db
   mysql_db: name=omeka login_user=omeka login_password=omeka state=present
