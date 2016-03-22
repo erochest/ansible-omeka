@@ -2,6 +2,7 @@
 - name: update apt cache
   apt: update_cache=yes
   become: true
+  ignore_errors: yes
 - name: install apt packages
   apt: pkg={{ item }} state=latest
   become: true
